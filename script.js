@@ -15,6 +15,195 @@ nav?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
 
 document.querySelector('#year').textContent = new Date().getFullYear();
 
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+const stages = [...document.querySelectorAll('.pipeline-stage')];
+const connectors = [...document.querySelectorAll('.pipeline-connector')];
+const terminal = document.querySelector('#lab-terminal');
+const labState = document.querySelector('#lab-state');
+const runBtn = document.querySelector('#run-lab');
+const incidentBtn = document.querySelector('#inject-incident');
+let pipelineRunning = false;
+let incidentRunning = false;
+
+function appendTerminal(text, type = 'normal') {
+  if (!terminal) return;
+  const line = document.createElement('div');
+  const cls = type === 'ok' ? 'term-ok' : type === 'warn' ? 'term-warn' : type === 'error' ? 'term-error' : type === 'muted' ? 'term-muted' : '';
+  line.innerHTML = `<span class="${cls}">${text}</span>`;
+  terminal.appendChild(line);
+  terminal.scrollTop = terminal.scrollHeight;
+}
+
+function resetPipeline() {
+  stages.forEach(stage => stage.classList.remove('running', 'complete', 'failed'));
+  connectors.forEach(c => c.classList.remove('active'));
+  if (terminal) terminal.innerHTML = '';
+}
+
+async function runPipeline() {
+  if (pipelineRunning) return;
+  pipelineRunning = true;
+  if (runBtn) runBtn.disabled = true;
+  if (incidentBtn) incidentBtn.disabled = true;
+  resetPipeline();
+  if (labState) labState.textContent = 'PIPELINE RUNNING';
+
+  const steps = [
+    ['$ git push origin main', 'Commit received: 7f3a2c1'],
+    ['$ npm ci && npm run build', 'Build artifact created successfully'],
+    ['$ npm test', '42 tests passed · 0 failed'],
+    ['$ security-scan --severity high', 'No critical or high vulnerabilities detected'],
+    ['$ terraform plan -out=tfplan', 'Plan: 2 to add, 1 to change, 0 to destroy'],
+    ['$ kubectl apply -f deploy/', 'Production rollout started'],
+    ['$ kubectl rollout status deployment/web', 'Rollout complete · monitoring active']
+  ];
+
+  for (let i = 0; i < stages.length; i++) {
+    stages[i].classList.add('running');
+    if (i > 0 && connectors[i - 1]) connectors[i - 1].classList.add('active');
+    appendTerminal(`<span class="term-prompt">${steps[i][0]}</span>`);
+    await sleep(650);
+    appendTerminal(`✓ ${steps[i][1]}`, 'ok');
+    await sleep(450);
+    stages[i].classList.remove('running');
+    stages[i].classList.add('complete');
+  }
+
+  appendTerminal('✓ Smoke tests passed', 'ok');
+  appendTerminal('✓ Datadog monitors healthy', 'ok');
+  appendTerminal('✓ Deployment complete: production healthy', 'ok');
+  if (labState) labState.textContent = 'PRODUCTION HEALTHY';
+  pipelineRunning = false;
+  if (runBtn) runBtn.disabled = false;
+  if (incidentBtn) incidentBtn.disabled = false;
+}
+
+function setService(name, state, label) {
+  const row = document.querySelector(`[data-service="${name}"]`);
+  if (!row) return;
+  row.classList.remove('warning', 'danger');
+  if (state) row.classList.add(state);
+  row.querySelector('strong').textContent = label;
+}
+
+function addIncidentEvent(label, text, cls = 'active') {
+  const feed = document.querySelector('#incident-feed');
+  if (!feed) return;
+  const item = document.createElement('div');
+  item.className = `feed-event ${cls}`;
+  item.innerHTML = `<time>${label}</time><span>${text}</span>`;
+  feed.appendChild(item);
+  feed.scrollTop = feed.scrollHeight;
+}
+
+async function injectIncident() {
+  if (incidentRunning || pipelineRunning) return;
+  incidentRunning = true;
+  if (incidentBtn) incidentBtn.disabled = true;
+  if (runBtn) runBtn.disabled = true;
+  const feed = document.querySelector('#incident-feed');
+  if (feed) feed.innerHTML = '';
+  const overall = document.querySelector('#overall-health');
+  const status = document.querySelector('#incident-status');
+  const latency = document.querySelector('#metric-latency');
+  const errors = document.querySelector('#metric-errors');
+  const replicas = document.querySelector('#metric-replicas');
+
+  status?.classList.remove('idle');
+  status?.classList.add('active');
+  if (status) status.textContent = 'ACTIVE';
+  if (labState) labState.textContent = 'INCIDENT DETECTED';
+
+  setService('api', 'warning', 'Degraded');
+  setService('observability', 'warning', 'Alerting');
+  overall?.classList.remove('healthy');
+  overall?.classList.add('warning');
+  if (overall) overall.textContent = 'DEGRADED';
+  if (latency) latency.textContent = '842 ms';
+  if (errors) errors.textContent = '4.81%';
+  addIncidentEvent('T+00s', 'Datadog detected elevated API latency.', 'error');
+  await sleep(1100);
+  addIncidentEvent('T+02s', 'BigPanda correlated alerts into a single incident.');
+  await sleep(1100);
+  setService('cluster', 'warning', 'Scaling');
+  if (replicas) replicas.textContent = '6 → 10';
+  addIncidentEvent('T+04s', 'Runbook triggered: scale application replicas.');
+  await sleep(1200);
+  addIncidentEvent('T+06s', 'Smoke check passed on recovered replicas.', 'complete');
+  setService('cluster', '', 'Healthy');
+  setService('api', '', 'Healthy');
+  setService('observability', '', 'Active');
+  if (latency) latency.textContent = '91 ms';
+  if (errors) errors.textContent = '0.05%';
+  if (replicas) replicas.textContent = '10 / 10';
+  await sleep(900);
+  overall?.classList.remove('warning');
+  overall?.classList.add('healthy');
+  if (overall) overall.textContent = 'HEALTHY';
+  status?.classList.remove('active');
+  status?.classList.add('idle');
+  if (status) status.textContent = 'RESOLVED';
+  addIncidentEvent('T+08s', 'Service recovered. Monitoring remains active.', 'complete');
+  if (labState) labState.textContent = 'INCIDENT RESOLVED';
+  incidentRunning = false;
+  if (incidentBtn) incidentBtn.disabled = false;
+  if (runBtn) runBtn.disabled = false;
+}
+
+runBtn?.addEventListener('click', runPipeline);
+incidentBtn?.addEventListener('click', injectIncident);
+
+const automationSection = document.querySelector('#automation');
+let hasAutoRun = false;
+if (automationSection && 'IntersectionObserver' in window) {
+  const observer = new IntersectionObserver(entries => {
+    if (entries.some(entry => entry.isIntersecting) && !hasAutoRun) {
+      hasAutoRun = true;
+      setTimeout(runPipeline, 450);
+    }
+  }, { threshold: 0.35 });
+  observer.observe(automationSection);
+}
+
+async function fetchLiveDeploymentStatus() {
+  const statusEl = document.querySelector('#github-run-status');
+  try {
+    const response = await fetch('https://api.github.com/repos/ohioze/DevOps/actions/runs?per_page=1', {
+      headers: { 'Accept': 'application/vnd.github+json' }
+    });
+    if (!response.ok) throw new Error(`GitHub API ${response.status}`);
+    const data = await response.json();
+    const run = data.workflow_runs?.[0];
+    if (!run) throw new Error('No workflow runs found');
+
+    const result = run.status === 'completed' ? (run.conclusion || 'unknown') : run.status;
+    if (statusEl) {
+      statusEl.textContent = result.toUpperCase();
+      statusEl.classList.remove('checking', 'healthy', 'warning', 'danger');
+      statusEl.classList.add(result === 'success' ? 'healthy' : result === 'in_progress' || result === 'queued' ? 'warning' : 'danger');
+    }
+    const workflow = document.querySelector('#deploy-workflow');
+    const runNo = document.querySelector('#deploy-run');
+    const sha = document.querySelector('#deploy-sha');
+    const time = document.querySelector('#deploy-time');
+    if (workflow) workflow.textContent = run.name || 'GitHub Pages';
+    if (runNo) runNo.textContent = `#${run.run_number}`;
+    if (sha) sha.textContent = run.head_sha?.slice(0, 7) || '—';
+    if (time) time.textContent = new Date(run.updated_at).toLocaleString([], { dateStyle: 'medium', timeStyle: 'short' });
+  } catch (error) {
+    if (statusEl) {
+      statusEl.textContent = 'UNAVAILABLE';
+      statusEl.classList.remove('checking');
+      statusEl.classList.add('warning');
+    }
+    const time = document.querySelector('#deploy-time');
+    if (time) time.textContent = 'GitHub API temporarily unavailable';
+  }
+}
+
+fetchLiveDeploymentStatus();
+setInterval(fetchLiveDeploymentStatus, 60000);
+
 function addWrappedText(doc, text, x, y, width, lineHeight = 4.5) {
   const lines = doc.splitTextToSize(text, width);
   doc.text(lines, x, y);
