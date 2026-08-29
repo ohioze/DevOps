@@ -315,3 +315,53 @@ document.querySelectorAll('.resume-download').forEach(link => {
     generateResumePdf();
   });
 });
+
+// Aviation media refresh: keep the footage short, focused, and visually polished.
+const aviationFeatureGrid = document.querySelector('#aviation .aviation-feature-grid');
+if (aviationFeatureGrid) {
+  const storyCard = aviationFeatureGrid.querySelector('.aviation-story-card');
+  const storyMarkup = storyCard ? storyCard.outerHTML : '';
+
+  aviationFeatureGrid.innerHTML = `
+    <article class="aviation-video-card aviation-video-featured">
+      <div class="aviation-video-head">
+        <div>
+          <p class="card-kicker">FIELD FOOTAGE · MAINTENANCE</p>
+          <h3>Nose wheel maintenance sequence</h3>
+        </div>
+        <span class="video-chip">5 SEC LOOP</span>
+      </div>
+      <video class="aviation-video aviation-video-enhanced" src="95601bc09092453a8a82300157ebdbb0.MOV" controls muted loop playsinline preload="metadata"></video>
+      <p class="video-note">Real aviation maintenance footage from my earlier aircraft engineering work.</p>
+    </article>
+
+    <article class="aviation-video-card">
+      <div class="aviation-video-head">
+        <div>
+          <p class="card-kicker">FIELD FOOTAGE · HANGAR</p>
+          <h3>Aircraft maintenance environment</h3>
+        </div>
+        <span class="video-chip">4.8 SEC LOOP</span>
+      </div>
+      <video class="aviation-video aviation-video-enhanced aviation-short-loop" src="D7A5F849-BD7A-4C34-ABEF-04241A34E547.MP4" controls muted playsinline preload="metadata" data-loop-end="4.8"></video>
+      <p class="video-note">A concise look inside the hangar environment where inspection, troubleshooting, and maintenance discipline were everyday operations.</p>
+    </article>
+
+    ${storyMarkup}
+  `;
+
+  const shortLoopVideo = aviationFeatureGrid.querySelector('.aviation-short-loop');
+  if (shortLoopVideo) {
+    const loopEnd = Number(shortLoopVideo.dataset.loopEnd || 4.8);
+    shortLoopVideo.addEventListener('timeupdate', () => {
+      if (shortLoopVideo.currentTime >= loopEnd) {
+        shortLoopVideo.currentTime = 0;
+        shortLoopVideo.play().catch(() => {});
+      }
+    });
+    shortLoopVideo.addEventListener('ended', () => {
+      shortLoopVideo.currentTime = 0;
+      shortLoopVideo.play().catch(() => {});
+    });
+  }
+}
