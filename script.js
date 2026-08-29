@@ -62,6 +62,8 @@ function generateResumePdf() {
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(8.5);
   doc.text('St. Louis, MO | LinkedIn: linkedin.com/in/john-isemede-/ | GitHub: github.com/ohioze', left, y);
+  y += 4.5;
+  doc.text('Portfolio: ohioze.github.io/DevOps/', left, y);
   y += 6;
 
   section('Professional Summary');
