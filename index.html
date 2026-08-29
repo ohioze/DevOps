@@ -17,10 +17,9 @@
       <a href="#impact">Impact</a>
       <a href="#automation">Automation</a>
       <a href="#projects">Work</a>
-      <a href="#stack">Skills</a>
       <a href="#experience">Experience</a>
+      <a href="#aviation">Aviation</a>
       <a href="#education">Education</a>
-      <a href="#journey">Journey</a>
       <a href="#contact">Contact</a>
     </nav>
     <button class="menu-btn" aria-expanded="false">Menu</button>
@@ -42,6 +41,7 @@
             <a href="https://www.linkedin.com/in/john-isemede-/" target="_blank" rel="noreferrer">LinkedIn <span>↗</span></a>
           </div>
         </div>
+
         <div class="terminal-card">
           <div class="terminal-top"><span></span><span></span><span></span><small>john@devops:~</small></div>
           <pre><code><span class="prompt">$</span> whoami
@@ -60,6 +60,7 @@ security_and_compliance
 <span class="success">● engineering for production</span></code></pre>
         </div>
       </div>
+
       <div class="hero-stats">
         <article><strong>9 / 10</strong><span>annual objectives completed ahead of year end</span></article>
         <article><strong>Multi Cloud</strong><span>AWS and Azure production experience</span></article>
@@ -92,63 +93,21 @@ security_and_compliance
 
       <div class="pipeline-card">
         <div class="pipeline-track" id="pipeline-track">
-          <div class="pipeline-stage" data-stage="0"><span class="stage-icon">⌘</span><strong>Commit</strong><small>Git</small></div>
-          <div class="pipeline-connector"></div>
-          <div class="pipeline-stage" data-stage="1"><span class="stage-icon">⚙</span><strong>Build</strong><small>CI</small></div>
-          <div class="pipeline-connector"></div>
-          <div class="pipeline-stage" data-stage="2"><span class="stage-icon">✓</span><strong>Test</strong><small>Quality</small></div>
-          <div class="pipeline-connector"></div>
-          <div class="pipeline-stage" data-stage="3"><span class="stage-icon">◆</span><strong>Security</strong><small>Scan</small></div>
-          <div class="pipeline-connector"></div>
-          <div class="pipeline-stage" data-stage="4"><span class="stage-icon">△</span><strong>IaC Plan</strong><small>Terraform</small></div>
-          <div class="pipeline-connector"></div>
-          <div class="pipeline-stage" data-stage="5"><span class="stage-icon">↗</span><strong>Deploy</strong><small>Production</small></div>
-          <div class="pipeline-connector"></div>
+          <div class="pipeline-stage" data-stage="0"><span class="stage-icon">⌘</span><strong>Commit</strong><small>Git</small></div><div class="pipeline-connector"></div>
+          <div class="pipeline-stage" data-stage="1"><span class="stage-icon">⚙</span><strong>Build</strong><small>CI</small></div><div class="pipeline-connector"></div>
+          <div class="pipeline-stage" data-stage="2"><span class="stage-icon">✓</span><strong>Test</strong><small>Quality</small></div><div class="pipeline-connector"></div>
+          <div class="pipeline-stage" data-stage="3"><span class="stage-icon">◆</span><strong>Security</strong><small>Scan</small></div><div class="pipeline-connector"></div>
+          <div class="pipeline-stage" data-stage="4"><span class="stage-icon">△</span><strong>IaC Plan</strong><small>Terraform</small></div><div class="pipeline-connector"></div>
+          <div class="pipeline-stage" data-stage="5"><span class="stage-icon">↗</span><strong>Deploy</strong><small>Production</small></div><div class="pipeline-connector"></div>
           <div class="pipeline-stage" data-stage="6"><span class="stage-icon">◉</span><strong>Observe</strong><small>Datadog</small></div>
         </div>
       </div>
 
       <div class="automation-grid">
-        <article class="lab-panel terminal-lab">
-          <div class="lab-panel-head"><div><span class="panel-dot"></span><span class="panel-dot"></span><span class="panel-dot"></span></div><small>deploy-production.sh</small></div>
-          <div id="lab-terminal" class="lab-terminal" aria-live="polite"><div><span class="term-muted"># Click “Run pipeline” or wait for auto-run...</span></div></div>
-        </article>
-
-        <article class="lab-panel health-panel">
-          <div class="lab-panel-title"><div><p class="card-kicker">SERVICE HEALTH</p><h3>Production</h3></div><span id="overall-health" class="health-pill healthy">HEALTHY</span></div>
-          <div class="service-list">
-            <div class="service-row" data-service="api"><span><i></i>API Gateway</span><strong>Healthy</strong></div>
-            <div class="service-row" data-service="cluster"><span><i></i>EKS Cluster</span><strong>Healthy</strong></div>
-            <div class="service-row" data-service="pipeline"><span><i></i>CI/CD Pipeline</span><strong>Passing</strong></div>
-            <div class="service-row" data-service="terraform"><span><i></i>Terraform State</span><strong>Synced</strong></div>
-            <div class="service-row" data-service="observability"><span><i></i>Observability</span><strong>Active</strong></div>
-          </div>
-          <div class="metric-grid">
-            <div><span>Availability</span><strong id="metric-availability">99.99%</strong></div>
-            <div><span>p95 latency</span><strong id="metric-latency">84 ms</strong></div>
-            <div><span>Error rate</span><strong id="metric-errors">0.03%</strong></div>
-            <div><span>Replicas</span><strong id="metric-replicas">6 / 6</strong></div>
-          </div>
-        </article>
-
-        <article class="lab-panel incident-panel">
-          <div class="lab-panel-title"><div><p class="card-kicker">INCIDENT AUTOMATION</p><h3>Detection → recovery</h3></div><span id="incident-status" class="incident-pill idle">IDLE</span></div>
-          <div id="incident-feed" class="incident-feed">
-            <div class="feed-event complete"><time>READY</time><span>Monitoring active. No production incidents.</span></div>
-          </div>
-        </article>
-
-        <article class="lab-panel live-deploy-panel">
-          <div class="lab-panel-title"><div><p class="card-kicker">REAL CI/CD STATUS</p><h3>This portfolio</h3></div><span id="github-run-status" class="health-pill checking">CHECKING</span></div>
-          <p class="real-status-copy">Pulled live from the public GitHub Actions API for <code>ohioze/DevOps</code>.</p>
-          <dl class="deploy-details">
-            <div><dt>Workflow</dt><dd id="deploy-workflow">Deploy portfolio to GitHub Pages</dd></div>
-            <div><dt>Run</dt><dd id="deploy-run">—</dd></div>
-            <div><dt>Commit</dt><dd id="deploy-sha">—</dd></div>
-            <div><dt>Updated</dt><dd id="deploy-time">—</dd></div>
-          </dl>
-          <a class="deploy-link" href="https://github.com/ohioze/DevOps/actions" target="_blank" rel="noreferrer">Inspect GitHub Actions ↗</a>
-        </article>
+        <article class="lab-panel terminal-lab"><div class="lab-panel-head"><div><span class="panel-dot"></span><span class="panel-dot"></span><span class="panel-dot"></span></div><small>deploy-production.sh</small></div><div id="lab-terminal" class="lab-terminal" aria-live="polite"><div><span class="term-muted"># Click “Run pipeline” or wait for auto-run...</span></div></div></article>
+        <article class="lab-panel health-panel"><div class="lab-panel-title"><div><p class="card-kicker">SERVICE HEALTH</p><h3>Production</h3></div><span id="overall-health" class="health-pill healthy">HEALTHY</span></div><div class="service-list"><div class="service-row" data-service="api"><span><i></i>API Gateway</span><strong>Healthy</strong></div><div class="service-row" data-service="cluster"><span><i></i>EKS Cluster</span><strong>Healthy</strong></div><div class="service-row" data-service="pipeline"><span><i></i>CI/CD Pipeline</span><strong>Passing</strong></div><div class="service-row" data-service="terraform"><span><i></i>Terraform State</span><strong>Synced</strong></div><div class="service-row" data-service="observability"><span><i></i>Observability</span><strong>Active</strong></div></div><div class="metric-grid"><div><span>Availability</span><strong id="metric-availability">99.99%</strong></div><div><span>p95 latency</span><strong id="metric-latency">84 ms</strong></div><div><span>Error rate</span><strong id="metric-errors">0.03%</strong></div><div><span>Replicas</span><strong id="metric-replicas">6 / 6</strong></div></div></article>
+        <article class="lab-panel incident-panel"><div class="lab-panel-title"><div><p class="card-kicker">INCIDENT AUTOMATION</p><h3>Detection → recovery</h3></div><span id="incident-status" class="incident-pill idle">IDLE</span></div><div id="incident-feed" class="incident-feed"><div class="feed-event complete"><time>READY</time><span>Monitoring active. No production incidents.</span></div></div></article>
+        <article class="lab-panel live-deploy-panel"><div class="lab-panel-title"><div><p class="card-kicker">REAL CI/CD STATUS</p><h3>This portfolio</h3></div><span id="github-run-status" class="health-pill checking">CHECKING</span></div><p class="real-status-copy">Pulled live from the public GitHub Actions API for <code>ohioze/DevOps</code>.</p><dl class="deploy-details"><div><dt>Workflow</dt><dd id="deploy-workflow">Deploy portfolio to GitHub Pages</dd></div><div><dt>Run</dt><dd id="deploy-run">—</dd></div><div><dt>Commit</dt><dd id="deploy-sha">—</dd></div><div><dt>Updated</dt><dd id="deploy-time">—</dd></div></dl><a class="deploy-link" href="https://github.com/ohioze/DevOps/actions" target="_blank" rel="noreferrer">Inspect GitHub Actions ↗</a></article>
       </div>
       <p class="lab-disclaimer">Pipeline and incident sequences are interactive demonstrations. The GitHub Actions deployment status is live data from this portfolio’s real CI/CD workflow.</p>
     </section>
@@ -181,14 +140,43 @@ security_and_compliance
       <div class="timeline">
         <article class="timeline-item"><div class="timeline-date">JUL 2025 → PRESENT</div><div class="timeline-body"><div class="role-line"><h3>DevOps Engineer · Senior Associate</h3><span class="role-pill">LSEG</span></div><p>Own and support DevOps and production operations for business critical financial platforms across cloud infrastructure, CI/CD, automation, monitoring, incident response, security, patching, and controlled production change.</p><div class="achievement"><strong>Selected scope</strong><span>AWS, Azure, Terraform, Ansible, GitLab CI/CD, Datadog, CloudWatch, Systems Manager, Docker, Kubernetes, Linux, Windows Server.</span></div></div></article>
         <article class="timeline-item"><div class="timeline-date">AUG 2021 → JUL 2025</div><div class="timeline-body"><div class="role-line"><h3>DevOps Engineer</h3><span class="role-pill">NoroTech · American Express</span></div><p>Worked across AWS and Azure infrastructure, CI/CD, Terraform, Ansible, scripting, Windows and Linux operations, Docker, Kubernetes, observability, IAM, TLS, vulnerability remediation, release consistency, production support, and operational resilience.</p><div class="achievement"><strong>Selected scope</strong><span>GitLab, Jenkins, GitHub Actions, Terraform, Ansible, Python, Bash, PowerShell, Datadog, Prometheus, Grafana, ELK, Application Insights.</span></div></div></article>
-        <article class="timeline-item"><div class="timeline-date">OCT 2020 → AUG 2021</div><div class="timeline-body"><div class="role-line"><h3>Aircraft Maintenance Technician</h3><span class="role-pill">Air First</span></div><p>Performed scheduled and unscheduled maintenance across a diverse fleet of commercial and private aircraft, including Boeing 737-200, 737-300, 737-800, Bombardier, Embraer, and King Air models in a safety critical environment.</p><div class="achievement"><strong>Core strengths built here</strong><span>Structured troubleshooting, root cause analysis, corrective action, audit readiness, and strict adherence to aviation regulatory standards.</span></div></div></article>
-        <article class="timeline-item"><div class="timeline-date">DEC 2018 → OCT 2020</div><div class="timeline-body"><div class="role-line"><h3>Aircraft Maintenance Technician</h3><span class="role-pill">Nigerian Air Force</span></div><p>Supported military operational readiness by performing preventative maintenance, phase inspections, and corrective repairs on C-130 Hercules transport aircraft under strict military governance and safety protocols.</p><div class="achievement"><strong>Core strengths built here</strong><span>Procedural traceability, quality control, fault isolation, technical manual usage, escalation discipline, and execution under pressure.</span></div></div></article>
-        <article class="timeline-item muted"><div class="timeline-date">CURRENT DEVELOPMENT</div><div class="timeline-body"><div class="role-line"><h3>AWS Certified Solutions Architect, Associate</h3><span class="role-pill outline">IN PROGRESS</span></div><p>Expanding cloud architecture depth across resilient AWS design, networking, compute, security, storage, and cost aware infrastructure decisions.</p></div></article>
+        <article class="timeline-item"><div class="timeline-date">OCT 2020 → AUG 2021</div><div class="timeline-body"><div class="role-line"><h3>Aircraft Maintenance Technician</h3><span class="role-pill">Air First</span></div><p>Performed scheduled and unscheduled maintenance across a diverse fleet of commercial and private aircraft, including Boeing 737 200, 737 300, 737 800, Bombardier, Embraer, and King Air models in a safety critical environment.</p><div class="achievement"><strong>Core strengths built here</strong><span>Structured troubleshooting, root cause analysis, corrective action, audit readiness, and strict adherence to aviation regulatory standards.</span></div></div></article>
+        <article class="timeline-item"><div class="timeline-date">DEC 2018 → OCT 2020</div><div class="timeline-body"><div class="role-line"><h3>Aircraft Maintenance Technician</h3><span class="role-pill">Nigerian Air Force</span></div><p>Supported military operational readiness by performing preventative maintenance, phase inspections, and corrective repairs on C 130 Hercules transport aircraft under strict military governance and safety protocols.</p><div class="achievement"><strong>Core strengths built here</strong><span>Procedural traceability, quality control, fault isolation, technical manual usage, escalation discipline, and execution under pressure.</span></div></div></article>
+      </div>
+    </section>
+
+    <section id="aviation" class="section-shell section-block aviation-section">
+      <div class="section-heading split-heading">
+        <div><p>06 · AVIATION STORY</p><h2>From aircraft reliability to platform reliability.</h2></div>
+        <p class="section-note">Visual proof of the discipline, technical standards, and operating environment that shaped my approach to DevOps and SRE.</p>
+      </div>
+
+      <div class="aviation-feature-grid">
+        <article class="aviation-video-card">
+          <div class="aviation-video-head"><div><p class="card-kicker">FIELD FOOTAGE</p><h3>Hangar environment</h3></div><span class="video-chip">REAL WORK FOOTAGE</span></div>
+          <video class="aviation-video" src="D7A5F849-BD7A-4C34-ABEF-04241A34E547.MP4" controls muted loop playsinline poster="IMG_9341.jpeg"></video>
+        </article>
+
+        <article class="aviation-story-card">
+          <p class="card-kicker">OPERATING MODEL</p>
+          <h3>The same reliability mindset carried forward.</h3>
+          <p class="story-copy">Aircraft maintenance taught me to respect procedure, isolate faults quickly, validate every corrective action, and treat reliability as something earned through discipline. That same logic is now how I approach cloud infrastructure, observability, CI/CD, and production change.</p>
+          <div class="reliability-map">
+            <div><strong>Aircraft Maintenance</strong><span>Inspect</span><span>Diagnose</span><span>Correct</span><span>Validate</span><span>Return to Service</span></div>
+            <div><strong>DevOps / SRE</strong><span>Monitor</span><span>Detect</span><span>Remediate</span><span>Validate</span><span>Return to Healthy</span></div>
+          </div>
+        </article>
+      </div>
+
+      <div class="aviation-gallery aviation-gallery-three">
+        <figure class="gallery-card"><img src="IMG_9341.jpeg" alt="C 130 aircraft in a hangar with maintenance access equipment." loading="lazy" /><figcaption><strong>Maintenance environment</strong><span>Inspection access, work positioning, and structured corrective activity in a controlled environment.</span></figcaption></figure>
+        <figure class="gallery-card"><img src="IMG_8560.jpeg" alt="John Isemede seated on a tug in front of a C 130 aircraft." loading="lazy" /><figcaption><strong>C 130 operations</strong><span>Hands on work around military transport aircraft and ground support equipment.</span></figcaption></figure>
+        <figure class="gallery-card"><img src="IMG_8570.jpeg" alt="John Isemede standing beside a C 130 aircraft on the apron." loading="lazy" /><figcaption><strong>Operational scale</strong><span>Reliability work where procedure, traceability, and validation matter.</span></figcaption></figure>
       </div>
     </section>
 
     <section id="education" class="section-shell section-block">
-      <div class="section-heading"><p>06 · EDUCATION</p><h2>Engineering foundation, aviation discipline, and cybersecurity depth.</h2></div>
+      <div class="section-heading"><p>07 · EDUCATION</p><h2>Engineering foundation, aviation discipline, and cybersecurity depth.</h2></div>
       <div class="education-grid">
         <article class="education-card"><p class="card-kicker">SEP 2014 → JUL 2018</p><h3>Bachelor of Engineering, Aerospace, Aeronautical and Astronautical Engineering</h3><p class="education-school">The University of Salford</p><div class="tags"><span>Problem Solving</span><span>Teamwork</span><span>Systems Thinking</span></div></article>
         <article class="education-card"><p class="card-kicker">JAN 2022 → MAY 2025</p><h3>Associate of Applied Science, Cybersecurity</h3><p class="education-school">Dallas College</p><p class="education-meta">Grade: 3.7</p><div class="tags"><span>Computer Science</span><span>Problem Solving</span><span>Security</span></div></article>
@@ -197,8 +185,8 @@ security_and_compliance
       </div>
     </section>
 
-    <section id="journey" class="section-shell section-block">
-      <div class="section-heading"><p>07 · ENGINEERING JOURNEY</p><h2>A clear progression from analytical engineering to modern platform delivery.</h2></div>
+    <section class="section-shell section-block">
+      <div class="section-heading"><p>08 · ENGINEERING JOURNEY</p><h2>A clear progression from analytical engineering to modern platform delivery.</h2></div>
       <div class="journey-strip">
         <article class="journey-card"><div class="journey-icon">✈</div><h3>Aeronautical Engineering</h3><p>Analytical systems thinking, mechanical and technical foundations.</p></article><div class="journey-arrow">→</div>
         <article class="journey-card"><div class="journey-icon">🛡</div><h3>Cybersecurity</h3><p>Security mindset, controls, governance, and structured risk awareness.</p></article><div class="journey-arrow">→</div>
@@ -208,13 +196,16 @@ security_and_compliance
       <div class="journey-note"><strong>What carries across every stage,</strong> disciplined troubleshooting, root cause analysis, procedural accuracy, measurable improvement, and a reliability first mindset.</div>
     </section>
 
-    <section class="section-shell section-block"><div class="section-heading"><p>08 · ENGINEERING PRINCIPLES</p><h2>How I approach production systems.</h2></div><div class="principles-grid"><blockquote><span>01</span>Automate repeated work, but understand the failure mode before automating it.</blockquote><blockquote><span>02</span>A deployment is not complete when the pipeline turns green. It is complete when production is healthy.</blockquote><blockquote><span>03</span>Observability should help an engineer decide what to do next, not simply generate more alerts.</blockquote><blockquote><span>04</span>Good DevOps means ownership across delivery, reliability, security, operations, and recovery.</blockquote></div></section>
+    <section class="section-shell section-block">
+      <div class="section-heading"><p>09 · ENGINEERING PRINCIPLES</p><h2>How I approach production systems.</h2></div>
+      <div class="principles-grid"><blockquote><span>01</span>Automate repeated work, but understand the failure mode before automating it.</blockquote><blockquote><span>02</span>A deployment is not complete when the pipeline turns green. It is complete when production is healthy.</blockquote><blockquote><span>03</span>Observability should help an engineer decide what to do next, not simply generate more alerts.</blockquote><blockquote><span>04</span>Good DevOps means ownership across delivery, reliability, security, operations, and recovery.</blockquote></div>
+    </section>
 
     <section id="contact" class="section-shell contact-section"><div><p class="card-kicker">LET'S BUILD RELIABLE SYSTEMS</p><h2>Senior DevOps, SRE, platform engineering, and cloud infrastructure.</h2><p class="contact-copy">For engineering opportunities or a deeper look at my experience, connect through LinkedIn, explore my GitHub, or download my résumé.</p></div><div class="contact-actions"><a class="btn primary resume-download" href="#">Download résumé</a><a class="btn ghost" href="https://www.linkedin.com/in/john-isemede-/" target="_blank" rel="noreferrer">LinkedIn ↗</a><a class="btn ghost" href="https://github.com/ohioze" target="_blank" rel="noreferrer">GitHub ↗</a></div></section>
   </main>
 
   <footer><span>© <span id="year"></span> John Isemede</span><span>DevOps · SRE · Cloud Engineering</span></footer>
-  <div class="mobile-nav" aria-hidden="true"><a href="#impact">Impact</a><a href="#automation">Automation</a><a href="#projects">Work</a><a href="#stack">Skills</a><a href="#experience">Experience</a><a href="#education">Education</a><a href="#journey">Journey</a><a href="#contact">Contact</a></div>
+  <div class="mobile-nav" aria-hidden="true"><a href="#impact">Impact</a><a href="#automation">Automation</a><a href="#projects">Work</a><a href="#experience">Experience</a><a href="#aviation">Aviation</a><a href="#education">Education</a><a href="#contact">Contact</a></div>
   <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js"></script>
   <script src="script.js"></script>
 </body>
