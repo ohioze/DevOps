@@ -196,24 +196,21 @@ footer { width: min(1180px, calc(100% - 40px)); margin: 0 auto; padding: 28px 0 
 
 .motion-ready .scroll-reveal {
   opacity: 0;
-  translate: 0 38px;
-  scale: .985;
+  transform: translate3d(0, 38px, 0) scale(.985);
   filter: blur(4px);
   transition:
     opacity .72s cubic-bezier(.2, .75, .2, 1),
-    translate .72s cubic-bezier(.2, .75, .2, 1),
-    scale .72s cubic-bezier(.2, .75, .2, 1),
+    transform .72s cubic-bezier(.2, .75, .2, 1),
     filter .58s ease;
   transition-delay: var(--reveal-delay, 0ms);
-  will-change: opacity, translate, scale;
+  will-change: opacity, transform;
 }
 
-.motion-ready .scroll-reveal[data-reveal="left"] { translate: -58px 18px; }
-.motion-ready .scroll-reveal[data-reveal="right"] { translate: 58px 18px; }
+.motion-ready .scroll-reveal[data-reveal="left"] { transform: translate3d(-72px, 18px, 0) scale(.985); }
+.motion-ready .scroll-reveal[data-reveal="right"] { transform: translate3d(72px, 18px, 0) scale(.985); }
 .motion-ready .scroll-reveal.is-visible {
   opacity: 1;
-  translate: 0 0;
-  scale: 1;
+  transform: translate3d(0, 0, 0) scale(1);
   filter: blur(0);
 }
 
@@ -232,13 +229,13 @@ footer { width: min(1180px, calc(100% - 40px)); margin: 0 auto; padding: 28px 0 
 .motion-ready .hero .terminal-card { animation-delay: 180ms; }
 
 @keyframes hero-rise {
-  from { opacity: 0; translate: 0 26px; filter: blur(5px); }
-  to { opacity: 1; translate: 0 0; filter: blur(0); }
+  from { opacity: 0; transform: translate3d(0, 30px, 0); filter: blur(5px); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); filter: blur(0); }
 }
 
 @media (max-width: 680px) {
   .motion-ready .scroll-reveal[data-reveal="left"],
-  .motion-ready .scroll-reveal[data-reveal="right"] { translate: 0 30px; }
+  .motion-ready .scroll-reveal[data-reveal="right"] { transform: translate3d(0, 34px, 0) scale(.985); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -252,8 +249,7 @@ footer { width: min(1180px, calc(100% - 40px)); margin: 0 auto; padding: 28px 0 
   .motion-ready .hero .social-row,
   .motion-ready .hero .terminal-card {
     opacity: 1;
-    translate: none;
-    scale: 1;
+    transform: none;
     filter: none;
     animation: none;
     transition: none;
