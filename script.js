@@ -316,52 +316,68 @@ document.querySelectorAll('.resume-download').forEach(link => {
   });
 });
 
-// Aviation media refresh: keep the footage short, focused, and visually polished.
-const aviationFeatureGrid = document.querySelector('#aviation .aviation-feature-grid');
-if (aviationFeatureGrid) {
-  const storyCard = aviationFeatureGrid.querySelector('.aviation-story-card');
-  const storyMarkup = storyCard ? storyCard.outerHTML : '';
+// Aviation story remains text-only in the final layout.
 
-  aviationFeatureGrid.innerHTML = `
-    <article class="aviation-video-card aviation-video-featured">
-      <div class="aviation-video-head">
-        <div>
-          <p class="card-kicker">FIELD FOOTAGE · MAINTENANCE</p>
-          <h3>Nose wheel maintenance sequence</h3>
-        </div>
-        <span class="video-chip">5 SEC LOOP</span>
-      </div>
-      <video class="aviation-video aviation-video-enhanced" src="95601bc09092453a8a82300157ebdbb0.MOV" controls muted loop playsinline preload="metadata"></video>
-      <p class="video-note">Real aviation maintenance footage from my earlier aircraft engineering work.</p>
-    </article>
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    <article class="aviation-video-card">
-      <div class="aviation-video-head">
-        <div>
-          <p class="card-kicker">FIELD FOOTAGE · HANGAR</p>
-          <h3>Aircraft maintenance environment</h3>
-        </div>
-        <span class="video-chip">4.8 SEC LOOP</span>
-      </div>
-      <video class="aviation-video aviation-video-enhanced aviation-short-loop" src="D7A5F849-BD7A-4C34-ABEF-04241A34E547.MP4" controls muted playsinline preload="metadata" data-loop-end="4.8"></video>
-      <p class="video-note">A concise look inside the hangar environment where inspection, troubleshooting, and maintenance discipline were everyday operations.</p>
-    </article>
+if (!reducedMotion && 'IntersectionObserver' in window) {
+  document.documentElement.classList.add('motion-ready');
 
-    ${storyMarkup}
-  `;
+  const progress = document.createElement('div');
+  progress.className = 'scroll-progress';
+  progress.setAttribute('aria-hidden', 'true');
+  document.body.prepend(progress);
 
-  const shortLoopVideo = aviationFeatureGrid.querySelector('.aviation-short-loop');
-  if (shortLoopVideo) {
-    const loopEnd = Number(shortLoopVideo.dataset.loopEnd || 4.8);
-    shortLoopVideo.addEventListener('timeupdate', () => {
-      if (shortLoopVideo.currentTime >= loopEnd) {
-        shortLoopVideo.currentTime = 0;
-        shortLoopVideo.play().catch(() => {});
-      }
+  const updateScrollProgress = () => {
+    const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+    const ratio = scrollable > 0 ? Math.min(window.scrollY / scrollable, 1) : 0;
+    progress.style.setProperty('--scroll-progress', ratio.toFixed(4));
+  };
+
+  updateScrollProgress();
+  window.addEventListener('scroll', updateScrollProgress, { passive: true });
+  window.addEventListener('resize', updateScrollProgress, { passive: true });
+
+  const revealGroups = [
+    '.section-heading',
+    '.hero-stats article',
+    '.impact-grid > article',
+    '.automation-topbar',
+    '.pipeline-card',
+    '.automation-grid > article',
+    '.project-row',
+    '.stack-grid > article',
+    '.timeline-item',
+    '.aviation-story-card',
+    '.education-grid > article',
+    '.journey-card',
+    '.journey-note',
+    '.principles-grid > blockquote',
+    '.contact-section'
+  ];
+
+  const revealItems = [...document.querySelectorAll(revealGroups.join(','))];
+  revealItems.forEach((item, index) => {
+    item.classList.add('scroll-reveal');
+    item.dataset.reveal = index % 2 === 0 ? 'left' : 'right';
+
+    const siblings = item.parentElement
+      ? [...item.parentElement.children].filter(child => revealItems.includes(child))
+      : [];
+    const siblingIndex = Math.max(0, siblings.indexOf(item));
+    item.style.setProperty('--reveal-delay', `${Math.min(siblingIndex * 75, 300)}ms`);
+  });
+
+  const revealObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('is-visible');
+      revealObserver.unobserve(entry.target);
     });
-    shortLoopVideo.addEventListener('ended', () => {
-      shortLoopVideo.currentTime = 0;
-      shortLoopVideo.play().catch(() => {});
-    });
-  }
+  }, {
+    threshold: 0.14,
+    rootMargin: '0px 0px -8% 0px'
+  });
+
+  revealItems.forEach(item => revealObserver.observe(item));
 }
