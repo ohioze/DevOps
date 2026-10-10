@@ -258,7 +258,7 @@ function generateResumePdf() {
   section('Professional Summary');
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(8.5);
-  y = addWrappedText(doc, 'Senior DevOps Engineer with nearly 8 years of experience improving cloud infrastructure, CI/CD, deployment automation, production reliability, observability, security, and operational standards across enterprise environments. Hands on with AWS, Azure, Terraform, Ansible, GitLab CI/CD, GitHub Actions, Jenkins, Docker, Kubernetes, NGINX, TLS, Windows Server, PowerShell, Python, Bash, Linux, Datadog, Prometheus, Grafana, and Azure Application Insights.', left, y, width, 4.2) + 2;
+  y = addWrappedText(doc, 'DevOps Engineer with experience improving cloud infrastructure, CI/CD, deployment automation, production reliability, observability, security, and operational standards across enterprise environments. Hands on with AWS, Azure, Terraform, Ansible, GitLab CI/CD, GitHub Actions, Jenkins, Docker, Kubernetes, NGINX, TLS, Windows Server, PowerShell, Python, Bash, Linux, Datadog, Prometheus, Grafana, and Azure Application Insights.', left, y, width, 4.2) + 2;
 
   section('Core Technical Skills');
   const skills = [
@@ -287,7 +287,7 @@ function generateResumePdf() {
   ].forEach(bullet);
 
   if (y > 235) { doc.addPage(); y = 15; }
-  doc.setFont('helvetica','bold'); doc.setFontSize(10); doc.text('NoroTech — DevOps Engineer, Client: American Express', left, y); doc.text('Aug 2018 – Jul 2025', 164, y); y += 5;
+  doc.setFont('helvetica','bold'); doc.setFontSize(10); doc.text('NoroTech — DevOps Engineer, Client: American Express', left, y); doc.text('Aug 2021 – Jul 2025', 164, y); y += 5;
   [
     'Supported AWS and Azure cloud infrastructure and hybrid environments.',
     'Built and maintained CI/CD workflows using GitLab, Jenkins, and GitHub Actions.',
@@ -297,6 +297,9 @@ function generateResumePdf() {
     'Supported IAM, least privilege, vulnerability remediation, SOC 2 aligned practices, release consistency, runbooks, and production resilience.'
   ].forEach(bullet);
 
+  section('Certifications');
+  doc.setFont('helvetica','normal'); doc.setFontSize(9);
+  doc.text('AWS Certified Solutions Architect Associate, 2026', left, y); y += 6;
   section('Education');
   doc.setFont('helvetica','bold'); doc.setFontSize(9);
   doc.text('Bachelor of Engineering, Aerospace / Aeronautical Engineering', left, y); y += 4;
@@ -381,3 +384,4 @@ if (!reducedMotion && 'IntersectionObserver' in window) {
 
   revealItems.forEach(item => revealObserver.observe(item));
 }
+
