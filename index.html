@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="John Isemede, Senior DevOps Engineer and Site Reliability Engineering portfolio." />
-  <title>John Isemede | Senior DevOps Engineer & SRE</title>
+  <meta name="description" content="John Isemede, DevOps Engineer at LSEG in St. Louis. AWS, Terraform, CI/CD automation, Linux and production reliability." />
+  <title>John Isemede | DevOps and Cloud Engineering</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260829-1" />
+  <link rel="stylesheet" href="styles.css?v=20261009-1" />
 </head>
 <body>
   <header class="site-header">
@@ -27,13 +27,13 @@
 
   <main id="top">
     <section class="hero section-shell">
-      <div class="eyebrow"><span class="status-dot"></span> SENIOR DEVOPS ENGINEER · SRE · CLOUD</div>
+      <div class="eyebrow"><span class="status-dot"></span> DEVOPS ENGINEER · AWS CERTIFIED · ST. LOUIS</div>
       <div class="hero-grid">
         <div>
           <h1>I build reliable infrastructure and remove manual risk from production.</h1>
-          <p class="hero-copy">Senior DevOps Engineer with experience across cloud infrastructure, CI/CD, Infrastructure as Code, observability, production automation, security, incident response, patching, and operational reliability.</p>
+          <p class="hero-copy">I’m a DevOps Engineer at LSEG, supporting financial services platforms with AWS, Terraform, GitLab CI/CD, Linux and Python/Bash automation. I focus on repeatable deployments, actionable monitoring and reliable production operations. I’m exploring permanent remote DevOps, cloud and SRE opportunities.</p>
           <div class="hero-actions">
-            <a class="btn primary" href="#automation">Run automation lab</a>
+            <a class="btn primary" href="#projects">Explore my work</a>
             <a class="btn ghost resume-download" href="#">Download résumé</a>
           </div>
           <div class="social-row">
@@ -46,7 +46,7 @@
           <div class="terminal-top"><span></span><span></span><span></span><small>john@devops:~</small></div>
           <pre><code><span class="prompt">$</span> whoami
 John Isemede
-Senior DevOps Engineer / SRE
+DevOps Engineer at LSEG
 
 <span class="prompt">$</span> cat focus.txt
 cloud_infrastructure
@@ -62,7 +62,7 @@ security_and_compliance
       </div>
 
       <div class="hero-stats">
-        <article><strong>9 / 10</strong><span>annual objectives completed ahead of year end</span></article>
+        <article><strong>AWS Certified</strong><span>Solutions Architect Associate, 2026</span></article>
         <article><strong>Multi Cloud</strong><span>AWS and Azure production experience</span></article>
         <article><strong>IaC</strong><span>Terraform, Ansible, CloudFormation, automation</span></article>
         <article><strong>Aviation to DevOps</strong><span>safety critical discipline applied to platform reliability</span></article>
@@ -105,22 +105,16 @@ security_and_compliance
 
       <div class="automation-grid">
         <article class="lab-panel terminal-lab"><div class="lab-panel-head"><div><span class="panel-dot"></span><span class="panel-dot"></span><span class="panel-dot"></span></div><small>deploy-production.sh</small></div><div id="lab-terminal" class="lab-terminal" aria-live="polite"><div><span class="term-muted"># Click “Run pipeline” or wait for auto-run...</span></div></div></article>
-        <article class="lab-panel health-panel"><div class="lab-panel-title"><div><p class="card-kicker">SERVICE HEALTH</p><h3>Production</h3></div><span id="overall-health" class="health-pill healthy">HEALTHY</span></div><div class="service-list"><div class="service-row" data-service="api"><span><i></i>API Gateway</span><strong>Healthy</strong></div><div class="service-row" data-service="cluster"><span><i></i>EKS Cluster</span><strong>Healthy</strong></div><div class="service-row" data-service="pipeline"><span><i></i>CI/CD Pipeline</span><strong>Passing</strong></div><div class="service-row" data-service="terraform"><span><i></i>Terraform State</span><strong>Synced</strong></div><div class="service-row" data-service="observability"><span><i></i>Observability</span><strong>Active</strong></div></div><div class="metric-grid"><div><span>Availability</span><strong id="metric-availability">99.99%</strong></div><div><span>p95 latency</span><strong id="metric-latency">84 ms</strong></div><div><span>Error rate</span><strong id="metric-errors">0.03%</strong></div><div><span>Replicas</span><strong id="metric-replicas">6 / 6</strong></div></div></article>
-        <article class="lab-panel incident-panel"><div class="lab-panel-title"><div><p class="card-kicker">INCIDENT AUTOMATION</p><h3>Detection → recovery</h3></div><span id="incident-status" class="incident-pill idle">IDLE</span></div><div id="incident-feed" class="incident-feed"><div class="feed-event complete"><time>READY</time><span>Monitoring active. No production incidents.</span></div></div></article>
+        <article class="lab-panel health-panel"><div class="lab-panel-title"><div><p class="card-kicker">SIMULATED SERVICE HEALTH</p><h3>Demo environment</h3></div><span id="overall-health" class="health-pill healthy">HEALTHY</span></div><div class="service-list"><div class="service-row" data-service="api"><span><i></i>API Gateway</span><strong>Healthy</strong></div><div class="service-row" data-service="cluster"><span><i></i>EKS Cluster</span><strong>Healthy</strong></div><div class="service-row" data-service="pipeline"><span><i></i>CI/CD Pipeline</span><strong>Passing</strong></div><div class="service-row" data-service="terraform"><span><i></i>Terraform State</span><strong>Synced</strong></div><div class="service-row" data-service="observability"><span><i></i>Observability</span><strong>Active</strong></div></div><div class="metric-grid"><div><span>Availability</span><strong id="metric-availability">99.99%</strong></div><div><span>p95 latency</span><strong id="metric-latency">84 ms</strong></div><div><span>Error rate</span><strong id="metric-errors">0.03%</strong></div><div><span>Replicas</span><strong id="metric-replicas">6 / 6</strong></div></div></article>
+        <article class="lab-panel incident-panel"><div class="lab-panel-title"><div><p class="card-kicker">SIMULATED INCIDENT RESPONSE</p><h3>Detection → recovery</h3></div><span id="incident-status" class="incident-pill idle">IDLE</span></div><div id="incident-feed" class="incident-feed"><div class="feed-event complete"><time>READY</time><span>Monitoring active. No production incidents.</span></div></div></article>
         <article class="lab-panel live-deploy-panel"><div class="lab-panel-title"><div><p class="card-kicker">REAL CI/CD STATUS</p><h3>This portfolio</h3></div><span id="github-run-status" class="health-pill checking">CHECKING</span></div><p class="real-status-copy">Pulled live from the public GitHub Actions API for <code>ohioze/DevOps</code>.</p><dl class="deploy-details"><div><dt>Workflow</dt><dd id="deploy-workflow">Deploy portfolio to GitHub Pages</dd></div><div><dt>Run</dt><dd id="deploy-run">—</dd></div><div><dt>Commit</dt><dd id="deploy-sha">—</dd></div><div><dt>Updated</dt><dd id="deploy-time">—</dd></div></dl><a class="deploy-link" href="https://github.com/ohioze/DevOps/actions" target="_blank" rel="noreferrer">Inspect GitHub Actions ↗</a></article>
       </div>
       <p class="lab-disclaimer">Pipeline and incident sequences are interactive demonstrations. The GitHub Actions deployment status is live data from this portfolio’s real CI/CD workflow.</p>
     </section>
 
     <section id="projects" class="section-shell section-block">
-      <div class="section-heading split-heading"><div><p>03 · SELECTED WORK</p><h2>Selected production engineering work.</h2></div><p class="section-note">Representative work across enterprise DevOps, automation, observability, patching, and controlled delivery.</p></div>
-      <div class="project-list">
-        <article class="project-row"><div class="project-number">01</div><div class="project-main"><p class="card-kicker">AWS · PLATFORM MIGRATION</p><h3>Rundeck Enterprise migration</h3><p>Led migration of Price Stream scheduling workloads from on premises Rundeck to AWS Rundeck Enterprise across Development, QA, Pre Production, and Production.</p></div><div class="project-tech"><span>AWS</span><span>Rundeck</span><span>Migration</span><span>Production</span></div></article>
-        <article class="project-row"><div class="project-number">02</div><div class="project-main"><p class="card-kicker">AWS · PATCHING · SECURITY</p><h3>Production patching and vulnerability remediation</h3><p>Support Linux and Windows patching using EC2, Systems Manager, PowerShell, RDP, secure jump boxes, controlled validation, and change management.</p></div><div class="project-tech"><span>AWS SSM</span><span>Linux</span><span>Windows</span><span>PowerShell</span></div></article>
-        <article class="project-row"><div class="project-number">03</div><div class="project-main"><p class="card-kicker">OBSERVABILITY · INCIDENT RESPONSE</p><h3>Datadog monitoring and alert integration</h3><p>Build and improve Datadog dashboards and alerts integrated with CloudWatch, AWS Health, BigPanda, and Azure Application Insights.</p></div><div class="project-tech"><span>Datadog</span><span>BigPanda</span><span>CloudWatch</span><span>App Insights</span></div></article>
-        <article class="project-row"><div class="project-number">04</div><div class="project-main"><p class="card-kicker">CI/CD · RELEASE ENGINEERING</p><h3>Pipeline and deployment automation</h3><p>Build and support CI/CD workflows, deployment automation, release readiness, production validation, smoke checks, and operational runbooks.</p></div><div class="project-tech"><span>GitLab CI/CD</span><span>GitHub Actions</span><span>Jenkins</span><span>Runbooks</span></div></article>
-        <article class="project-row"><div class="project-number">05</div><div class="project-main"><p class="card-kicker">INFRASTRUCTURE AS CODE</p><h3>Repeatable cloud infrastructure</h3><p>Use Terraform, Ansible, CloudFormation, and scripting to improve provisioning consistency, configuration management, and operational repeatability.</p></div><div class="project-tech"><span>Terraform</span><span>Ansible</span><span>CloudFormation</span><span>Python</span></div></article>
-      </div>
+      <div class="section-heading split-heading"><div><p>03 · SELECTED WORK</p><h2>How I approach infrastructure and production delivery.</h2></div><p class="section-note">Professional examples describe my responsibilities and validation approach. Internal code, system identifiers and operational evidence are not published here.</p></div>
+      <div class="project-list"><article class="project-row"><div class="project-number">01</div><div class="project-main"><p class="card-kicker">AWS · PLATFORM MIGRATION</p><h3>Moving scheduling workloads to AWS</h3><dl class="case-details"><dt>Goal</dt><dd>Move scheduling workloads from an existing environment to AWS Rundeck Enterprise across development, QA, preproduction and production.</dd><dt>My contribution</dt><dd>Led the migration, coordinated with infrastructure and application teams, and helped resolve a cloud connectivity gap before rollout.</dd><dt>Validation</dt><dd>Validated the revised connectivity approach and deployment readiness across the four environments before completing the rollout.</dd></dl></div><div class="project-tech"><span>AWS</span><span>Rundeck</span><span>Networking</span><span>Validation</span></div></article><article class="project-row"><div class="project-number">02</div><div class="project-main"><p class="card-kicker">CI/CD · RELEASE ENGINEERING</p><h3>Controlled delivery for financial platforms</h3><dl class="case-details"><dt>Goal</dt><dd>Keep deployments repeatable while maintaining the checks needed for production changes.</dd><dt>My contribution</dt><dd>Maintain GitLab CI/CD workflows with environment specific configuration and validation. Perform deployment prechecks, back up database schemas and existing releases, verify configuration and validate services after installation.</dd><dt>Validation</dt><dd>Coordinate release checks with developers, QA, infrastructure and security teams. Use postdeployment service validation and runbooks to support production readiness.</dd></dl></div><div class="project-tech"><span>GitLab CI/CD</span><span>Python</span><span>Bash</span><span>Runbooks</span></div></article><article class="project-row"><div class="project-number">03</div><div class="project-main"><p class="card-kicker">OBSERVABILITY · PRODUCTION SUPPORT</p><h3>Actionable monitoring and troubleshooting</h3><dl class="case-details"><dt>Goal</dt><dd>Give engineers useful signals for detecting and investigating infrastructure and service issues.</dd><dt>My contribution</dt><dd>Build Datadog dashboards and alerts, connecting monitoring with CloudWatch, AWS Health and BigPanda. Use Linux and cloud troubleshooting alongside deployment and operational context.</dd><dt>Validation</dt><dd>Review monitoring signals and service checks during troubleshooting, then document findings and operational procedures for the team.</dd></dl></div><div class="project-tech"><span>Datadog</span><span>CloudWatch</span><span>BigPanda</span><span>Linux</span></div></article><article class="project-row"><div class="project-number">04</div><div class="project-main"><p class="card-kicker">INFRASTRUCTURE AS CODE · AWS</p><h3>Repeatable infrastructure operations</h3><dl class="case-details"><dt>Goal</dt><dd>Reduce manual configuration differences across cloud environments and recurring operational tasks.</dd><dt>My contribution</dt><dd>Develop Terraform infrastructure configurations and use Ansible, Python and Bash for provisioning, patching and deployments. Support EC2, IAM, storage, secure connectivity and Linux operations.</dd><dt>Validation</dt><dd>Review changes and validate configuration and services in the target environment, using controlled change procedures for production.</dd></dl></div><div class="project-tech"><span>Terraform</span><span>Ansible</span><span>AWS</span><span>Automation</span></div></article></div>
     </section>
 
     <section id="stack" class="section-shell section-block">
@@ -164,7 +158,7 @@ security_and_compliance
 
     <section id="education" class="section-shell section-block">
       <div class="section-heading"><p>07 · EDUCATION</p><h2>Engineering foundation, aviation discipline, and cybersecurity depth.</h2></div>
-      <div class="education-grid">
+      <div class="education-grid"><article class="education-card"><p class="card-kicker">CERTIFICATION · 2026</p><h3>AWS Certified Solutions Architect Associate</h3><p class="education-school">Amazon Web Services</p><p>Cloud architecture, networking, security and resilient infrastructure.</p><div class="tags"><span>AWS</span><span>Cloud Architecture</span><span>Security</span></div></article>
         <article class="education-card"><p class="card-kicker">SEP 2014 → JUL 2018</p><h3>Bachelor of Engineering, Aerospace, Aeronautical and Astronautical Engineering</h3><p class="education-school">The University of Salford</p><div class="tags"><span>Problem Solving</span><span>Teamwork</span><span>Systems Thinking</span></div></article>
         <article class="education-card"><p class="card-kicker">JAN 2022 → MAY 2025</p><h3>Associate of Applied Science, Cybersecurity</h3><p class="education-school">Dallas College</p><p class="education-meta">Grade: 3.7</p><div class="tags"><span>Computer Science</span><span>Problem Solving</span><span>Security</span></div></article>
         <article class="education-card"><p class="card-kicker">AUG 2021 → DEC 2021</p><h3>Associate of Applied Science, Airframe Mechanics and Aircraft Maintenance Technology</h3><p class="education-school">Pima Community College</p><p class="education-meta">Grade: 3.76</p><div class="tags"><span>Aviation Maintenance</span><span>Teamwork</span><span>Problem Solving</span></div></article>
@@ -188,12 +182,13 @@ security_and_compliance
       <div class="principles-grid"><blockquote><span>01</span>Automate repeated work, but understand the failure mode before automating it.</blockquote><blockquote><span>02</span>A deployment is not complete when the pipeline turns green. It is complete when production is healthy.</blockquote><blockquote><span>03</span>Observability should help an engineer decide what to do next, not simply generate more alerts.</blockquote><blockquote><span>04</span>Good DevOps means ownership across delivery, reliability, security, operations, and recovery.</blockquote></div>
     </section>
 
-    <section id="contact" class="section-shell contact-section"><div><p class="card-kicker">LET'S BUILD RELIABLE SYSTEMS</p><h2>Senior DevOps, SRE, platform engineering, and cloud infrastructure.</h2><p class="contact-copy">For engineering opportunities or a deeper look at my experience, connect through LinkedIn, explore my GitHub, or download my résumé.</p></div><div class="contact-actions"><a class="btn primary resume-download" href="#">Download résumé</a><a class="btn ghost" href="https://www.linkedin.com/in/john-isemede-/" target="_blank" rel="noreferrer">LinkedIn ↗</a><a class="btn ghost" href="https://github.com/ohioze" target="_blank" rel="noreferrer">GitHub ↗</a></div></section>
+    <section id="contact" class="section-shell contact-section"><div><p class="card-kicker">LET'S BUILD RELIABLE SYSTEMS</p><h2>Let’s talk about DevOps, cloud and platform reliability.</h2><p class="contact-copy">Based in St. Louis, Missouri. Open to permanent remote opportunities in the United States. Connect through LinkedIn or review my résumé and GitHub.</p></div><div class="contact-actions"><a class="btn primary resume-download" href="#">Download résumé</a><a class="btn ghost" href="https://www.linkedin.com/in/john-isemede-/" target="_blank" rel="noreferrer">LinkedIn ↗</a><a class="btn ghost" href="https://github.com/ohioze" target="_blank" rel="noreferrer">GitHub ↗</a></div></section>
   </main>
 
   <footer><span>© <span id="year"></span> John Isemede</span><span>DevOps · SRE · Cloud Engineering</span></footer>
   <div class="mobile-nav" aria-hidden="true"><a href="#impact">Impact</a><a href="#automation">Automation</a><a href="#projects">Work</a><a href="#experience">Experience</a><a href="#aviation">Aviation</a><a href="#education">Education</a><a href="#contact">Contact</a></div>
   <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js"></script>
-  <script src="script.js?v=20260829-1"></script>
+  <script src="script.js?v=20261009-1"></script>
 </body>
 </html>
+
