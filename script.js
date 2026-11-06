@@ -279,7 +279,8 @@ function generateResumePdf() {
   doc.setFont('helvetica','bold'); doc.setFontSize(10); doc.text('LSEG — DevOps Engineer', left, y); doc.text('Jul 2025 – Present', 164, y); y += 5;
   [
     'Own and support DevOps and production operations for business critical financial platforms.',
-    'Led Price Stream scheduling migration from on premises Rundeck to AWS Rundeck Enterprise across Development, QA, Pre Production, and Production.',
+    'Owned an assigned cloud delivery workflow end to end, from infrastructure and automation through preproduction validation, testing, and production deployment.',
+    'Contributed to migration of enterprise scheduling workloads from on premises Rundeck to AWS Rundeck Enterprise, supporting rollout across multiple environments.',
     'Build and maintain Terraform Infrastructure as Code and automation using Ansible, Python, Bash, and PowerShell.',
     'Build and support GitLab CI/CD pipelines, release readiness, deployment validation, and operational runbooks.',
     'Build Datadog dashboards and alerts integrated with CloudWatch, AWS Health, BigPanda, and Azure Application Insights.',
