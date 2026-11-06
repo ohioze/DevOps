@@ -204,7 +204,7 @@ async function fetchLiveDeploymentStatus() {
 fetchLiveDeploymentStatus();
 setInterval(fetchLiveDeploymentStatus, 60000);
 
-function addWrappedText(doc, text, x, y, width, lineHeight = 4.5) {
+function addWrappedText(doc, text, x, y, width, lineHeight = 4.2) {
   const lines = doc.splitTextToSize(text, width);
   doc.text(lines, x, y);
   return y + lines.length * lineHeight;
@@ -219,98 +219,183 @@ function generateResumePdf() {
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF({ unit: 'mm', format: 'letter' });
   const left = 14;
-  const width = 188;
-  let y = 15;
+  const right = 202;
+  const width = right - left;
+  let y = 16;
+  const blue = [31, 78, 121];
+  const dark = [30, 30, 30];
 
-  const section = title => {
-    y += 2;
+  function section(title) {
+    y += 2.5;
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(10.5);
+    doc.setTextColor(...blue);
     doc.text(title.toUpperCase(), left, y);
-    y += 2;
-    doc.setDrawColor(70);
-    doc.line(left, y, 202, y);
+    y += 2.2;
+    doc.setDrawColor(...blue);
+    doc.setLineWidth(0.35);
+    doc.line(left, y, right, y);
     y += 5;
-  };
+  }
 
-  const bullet = text => {
+  function body(text, size = 9.2) {
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(size);
+    doc.setTextColor(...dark);
+    y = addWrappedText(doc, text, left, y, width, 4.1) + 1.5;
+  }
+
+  function bullet(text) {
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(9.1);
+    doc.setTextColor(...dark);
+    doc.text('•', left + 2, y);
+    const lines = doc.splitTextToSize(text, width - 7);
+    doc.text(lines, left + 7, y);
+    y += lines.length * 4.1 + 1;
+  }
+
+  function skill(text) {
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(8.9);
+    doc.setTextColor(...dark);
+    y = addWrappedText(doc, text, left, y, width, 3.9) + 1.2;
+  }
+
+  function role(title, date) {
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(10);
+    doc.setTextColor(...dark);
+    doc.text(title, left, y, { maxWidth: 140 });
+    doc.setTextColor(...blue);
+    doc.text(date, right, y, { align: 'right' });
+    y += 5.2;
+  }
+
+  function pageFooter(page) {
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(8.5);
-    const lines = doc.splitTextToSize('• ' + text, width - 2);
-    doc.text(lines, left + 2, y);
-    y += lines.length * 4 + 1;
-  };
+    doc.setTextColor(95, 95, 95);
+    doc.text('Page ' + page, right, 272, { align: 'right' });
+  }
 
+  // Page one header and links
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(20);
-  doc.text('JOHN ISEMEDE', left, y);
-  y += 7;
-  doc.setFontSize(10.5);
-  doc.text('SENIOR DEVOPS ENGINEER | CLOUD, CI/CD, AUTOMATION & PRODUCTION RELIABILITY', left, y);
-  y += 5;
+  doc.setTextColor(...blue);
+  doc.text('JOHN ISEMEDE', 108, y, { align: 'center' });
+  y += 6.5;
+  doc.setFontSize(10.2);
+  doc.setTextColor(90, 90, 90);
+  doc.text('CLOUD DELIVERY ENGINEER | DEVOPS | CLOUD RELIABILITY', 108, y, { align: 'center' });
+  y += 5.4;
   doc.setFont('helvetica', 'normal');
-  doc.setFontSize(8.5);
-  doc.text('St. Louis, MO | LinkedIn: linkedin.com/in/john-isemede-/ | GitHub: github.com/ohioze', left, y);
-  y += 4.5;
-  doc.text('Portfolio: ohioze.github.io/DevOps/', left, y);
-  y += 6;
+  doc.setFontSize(9);
+  doc.setTextColor(...dark);
+  doc.text('St. Louis, MO  |  682-727-7141', 108, y, { align: 'center' });
+  y += 4.2;
+  const links = [
+    ['ohioisemede@gmail.com', 'mailto:ohioisemede@gmail.com'],
+    ['LinkedIn', 'https://www.linkedin.com/in/john-isemede-/'],
+    ['Portfolio', 'https://ohioze.github.io/DevOps/']
+  ];
+  const separators = ['  |  ', '  |  '];
+  let totalWidth = 0;
+  links.forEach((item, index) => {
+    totalWidth += doc.getTextWidth(item[0]);
+    if (index < separators.length) totalWidth += doc.getTextWidth(separators[index]);
+  });
+  let linkX = 108 - totalWidth / 2;
+  for (let i = 0; i < links.length; i++) {
+    const [label, url] = links[i];
+    const linkWidth = doc.getTextWidth(label);
+    doc.setTextColor(...blue);
+    doc.text(label, linkX, y);
+    doc.link(linkX, y - 3.2, linkWidth, 4, { url });
+    linkX += linkWidth;
+    if (i < separators.length) {
+      doc.setTextColor(...dark);
+      doc.text(separators[i], linkX, y);
+      linkX += doc.getTextWidth(separators[i]);
+    }
+  }
+  y += 3;
 
   section('Professional Summary');
-  doc.setFont('helvetica', 'normal');
-  doc.setFontSize(8.5);
-  y = addWrappedText(doc, 'DevOps Engineer with experience improving cloud infrastructure, CI/CD, deployment automation, production reliability, observability, security, and operational standards across enterprise environments. Hands on with AWS, Azure, Terraform, Ansible, GitLab CI/CD, GitHub Actions, Jenkins, Docker, Kubernetes, NGINX, TLS, Windows Server, PowerShell, Python, Bash, Linux, Datadog, Prometheus, Grafana, and Azure Application Insights.', left, y, width, 4.2) + 2;
+  body('Cloud Delivery Engineer with hands-on experience building and supporting AWS infrastructure, delivery automation, and production operations. Owned an assigned cloud delivery workflow from infrastructure and automation through pre-production validation, testing, and production deployment. Experienced with Terraform, Ansible, GitLab CI/CD, Python and Bash, observability, security controls, and release validation in financial services environments.');
 
-  section('Core Technical Skills');
-  const skills = [
-    ['Cloud & Infrastructure', 'AWS, Azure, AWS Outposts, EC2, VPC, IAM, Systems Manager, CloudWatch, Azure Application Insights'],
-    ['CI/CD & Release Engineering', 'GitLab CI/CD, GitHub Actions, Jenkins, deployment pipelines, release management, change readiness, production validation'],
-    ['Infrastructure as Code & Automation', 'Terraform, Ansible, CloudFormation, Python, Bash, PowerShell, YAML'],
-    ['Containers & Platforms', 'Docker, Kubernetes, Amazon EKS, NGINX, containerized deployments'],
-    ['Observability & Reliability', 'Datadog, Prometheus, Grafana, ELK, CloudWatch, BigPanda, incident response, RCA'],
-    ['Security & Operations', 'IAM, least privilege, TLS, SSH, SOC 2 aligned operations, vulnerability remediation, Linux, Windows Server, RDP']
-  ];
-  skills.forEach(([k,v]) => {
-    doc.setFont('helvetica','bold'); doc.setFontSize(8.5); doc.text(k + ':', left, y);
-    doc.setFont('helvetica','normal');
-    y = addWrappedText(doc, v, left + 42, y, width - 42, 4) + 1;
-  });
+  section('Technical Expertise');
+  [
+    'Cloud Platforms: AWS, Microsoft Azure, AWS Outposts, EC2, VPC, IAM, Systems Manager, CloudWatch, Azure Application Insights, hybrid cloud infrastructure',
+    'Infrastructure as Code: Terraform, AWS CloudFormation, Ansible, reusable provisioning patterns, configuration automation, environment standardization',
+    'DevSecOps and CI/CD: GitLab CI/CD, Jenkins, GitHub Actions, automated build, test, deployment and validation workflows, release readiness, change management',
+    'Automation: Python, Boto3, Bash, PowerShell, YAML, cloud provisioning, deployment automation, patching, compliance and recurring operations',
+    'Containers and Platforms: Docker, Kubernetes, Amazon EKS, NGINX, Linux, Windows Server, networking, secure connectivity',
+    'Security and Observability: IAM, least privilege, TLS, vulnerability remediation, SOC 2 aligned practices, Datadog, Prometheus, Grafana, ELK, BigPanda'
+  ].forEach(skill);
 
   section('Professional Experience');
-  doc.setFont('helvetica','bold'); doc.setFontSize(10); doc.text('LSEG — DevOps Engineer', left, y); doc.text('Jul 2025 – Present', 164, y); y += 5;
+  role('LSEG | Senior Associate DevOps Engineer', 'Jul 2025 – Present');
+  doc.setFont('helvetica', 'italic');
+  doc.setFontSize(8.8);
+  doc.setTextColor(90, 90, 90);
+  doc.text('St. Louis, Missouri', left, y);
+  y += 4.5;
   [
-    'Own and support DevOps and production operations for business critical financial platforms.',
-    'Owned an assigned cloud delivery workflow end to end, from infrastructure and automation through preproduction validation, testing, and production deployment.',
-    'Contributed to migration of enterprise scheduling workloads from on premises Rundeck to AWS Rundeck Enterprise, supporting rollout across multiple environments.',
-    'Build and maintain Terraform Infrastructure as Code and automation using Ansible, Python, Bash, and PowerShell.',
-    'Build and support GitLab CI/CD pipelines, release readiness, deployment validation, and operational runbooks.',
-    'Build Datadog dashboards and alerts integrated with CloudWatch, AWS Health, BigPanda, and Azure Application Insights.',
-    'Support production incident response, root cause analysis, corrective actions, patching, vulnerability remediation, secure connectivity, SSH, TLS, and IAM least privilege controls.'
+    'Own an assigned cloud delivery workflow end to end, taking it from infrastructure and automation through pre-production validation, testing, and production deployment.',
+    'Build and support AWS infrastructure using Terraform and Ansible, with changes validated through controlled delivery and operational procedures.',
+    'Develop and maintain GitLab CI/CD workflows with review and validation steps that support repeatable releases and production readiness.',
+    'Automate cloud operations, patching, and compliance reporting with Python, Boto3, Bash, and related infrastructure tooling.',
+    'Build Datadog monitors, dashboards, and alerts integrated with AWS monitoring and incident management signals to support troubleshooting and operational response.',
+    'Support cloud and platform operations across EC2, Systems Manager, AWS Outposts, IAM, Linux, Kubernetes, secure connectivity, and TLS.',
+    'Contribute to migration of enterprise scheduling workloads from on-premises infrastructure to AWS, supporting rollout and connectivity troubleshooting.'
+  ].forEach(bullet);
+  pageFooter(1);
+
+  // Page two keeps the Cloud Delivery Engineer template's running header and page number.
+  doc.addPage();
+  y = 17;
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(9.5);
+  doc.setTextColor(90, 90, 90);
+  doc.text('JOHN ISEMEDE  |  CLOUD DELIVERY ENGINEER', right, y, { align: 'right' });
+  y += 12;
+
+  section('Selected Delivery Highlights');
+  body('Examples of assigned platform work, described without internal system names or operational identifiers.', 9);
+  [
+    'Owned an assigned cloud workflow through infrastructure setup, automation, pre-production validation, testing, and production deployment.',
+    'Improved delivery controls by adding automated review and security checks to software change workflows.',
+    'Standardized monitoring configuration through reusable infrastructure code for cloud service alerts.',
+    'Automated recurring cloud compliance reporting and organized results for operational review.',
+    'Troubleshot secure session access for hybrid cloud infrastructure and improved the reliability of support procedures.',
+    'Supported controlled machine image patching through non-production validation and production readiness steps.',
+    'Contributed to migration of enterprise scheduling workloads to AWS and helped resolve connectivity issues during rollout.'
   ].forEach(bullet);
 
-  if (y > 235) { doc.addPage(); y = 15; }
-  doc.setFont('helvetica','bold'); doc.setFontSize(10); doc.text('NoroTech — DevOps Engineer, Client: American Express', left, y); doc.text('Aug 2021 – Jul 2025', 164, y); y += 5;
-  [
-    'Supported AWS and Azure cloud infrastructure and hybrid environments.',
-    'Built and maintained CI/CD workflows using GitLab, Jenkins, and GitHub Actions.',
-    'Automated infrastructure and configuration with Terraform and Ansible.',
-    'Used Python, Bash, and PowerShell across Linux and Windows operational environments.',
-    'Worked with Docker, Kubernetes, NGINX, TLS, networking, Datadog, Prometheus, Grafana, ELK, and Application Insights.',
-    'Supported IAM, least privilege, vulnerability remediation, SOC 2 aligned practices, release consistency, runbooks, and production resilience.'
-  ].forEach(bullet);
-
-  section('Certifications');
-  doc.setFont('helvetica','normal'); doc.setFontSize(9);
-  doc.text('AWS Certified Solutions Architect Associate, 2026', left, y); y += 6;
   section('Education');
-  doc.setFont('helvetica','bold'); doc.setFontSize(9);
-  doc.text('Bachelor of Engineering, Aerospace / Aeronautical Engineering', left, y); y += 4;
-  doc.setFont('helvetica','normal'); doc.text('The University of Salford, Manchester, UK', left, y); y += 5;
-  doc.setFont('helvetica','bold'); doc.text('Associate of Applied Science, Cybersecurity', left, y); y += 4;
-  doc.setFont('helvetica','normal'); doc.text('Dallas College', left, y); y += 5;
-  doc.setFont('helvetica','bold'); doc.text('Associate of Applied Science, Airframe Mechanics and Aircraft Maintenance Technology', left, y); y += 4;
-  doc.setFont('helvetica','normal'); doc.text('Pima Community College', left, y);
+  role('University of Salford | B.Eng., Aerospace / Aeronautical Engineering', 'Sep 2014 – Jul 2018');
+  doc.setFont('helvetica', 'italic');
+  doc.setFontSize(8.8);
+  doc.setTextColor(90, 90, 90);
+  doc.text('Salford, United Kingdom', left, y);
+  y += 5.5;
+  role('Pima Community College | A.A.S., Airframe Mechanics', 'Aug 2021 – Dec 2021');
+  doc.setFont('helvetica', 'italic');
+  doc.setFontSize(8.8);
+  doc.setTextColor(90, 90, 90);
+  doc.text('Tucson, Arizona', left, y);
+  y += 5.5;
 
-  doc.save('John_Isemede_Senior_DevOps_Resume.pdf');
+  section('Certifications and Training');
+  [
+    'AWS: AWS Certified Solutions Architect – Associate, 2026',
+    'Information Security: Computer Information Technology Information Security Certificate, Dallas College, Dec 2023',
+    'Additional Training: Git for Developers, KodeKloud, Sep 2024; Cisco Networking Certification Course, Oct 2022'
+  ].forEach(skill);
+
+  pageFooter(2);
+  doc.save('John_Isemede_Cloud_Delivery_Engineer_Resume.pdf');
 }
 
 document.querySelectorAll('.resume-download').forEach(link => {
