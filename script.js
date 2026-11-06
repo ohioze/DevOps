@@ -322,7 +322,7 @@ function generateResumePdf() {
   y += 3;
 
   section('Professional Summary');
-  body('Cloud Delivery Engineer with hands-on experience building and supporting AWS infrastructure, delivery automation, and production operations. Owned an assigned cloud delivery workflow from infrastructure and automation through pre-production validation, testing, and production deployment. Experienced with Terraform, Ansible, GitLab CI/CD, Python and Bash, observability, security controls, and release validation in financial services environments.');
+  body('Cloud Delivery Engineer with hands-on experience building and supporting AWS infrastructure, delivery automation, and production operations. Solely owned an assigned work deliverable from infrastructure and automation through pre-production validation, testing, and production deployment. Experienced with Terraform, Ansible, GitLab CI/CD, Python and Bash, observability, security controls, and release validation in financial services environments.');
 
   section('Technical Expertise');
   [
@@ -342,7 +342,7 @@ function generateResumePdf() {
   doc.text('St. Louis, Missouri', left, y);
   y += 4.5;
   [
-    'Own an assigned cloud delivery workflow end to end, taking it from infrastructure and automation through pre-production validation, testing, and production deployment.',
+    'Solely owned an assigned work deliverable end to end, taking it from infrastructure and automation through pre-production validation, testing, and production deployment.',
     'Build and support AWS infrastructure using Terraform and Ansible, with changes validated through controlled delivery and operational procedures.',
     'Develop and maintain GitLab CI/CD workflows with review and validation steps that support repeatable releases and production readiness.',
     'Automate cloud operations, patching, and compliance reporting with Python, Boto3, Bash, and related infrastructure tooling.',
@@ -364,7 +364,7 @@ function generateResumePdf() {
   section('Selected Delivery Highlights');
   body('Examples of assigned platform work, described without internal system names or operational identifiers.', 9);
   [
-    'Owned an assigned cloud workflow through infrastructure setup, automation, pre-production validation, testing, and production deployment.',
+    'Solely owned the assigned work deliverable through infrastructure setup, automation, pre-production validation, testing, and production deployment.',
     'Improved delivery controls by adding automated review and security checks to software change workflows.',
     'Standardized monitoring configuration through reusable infrastructure code for cloud service alerts.',
     'Automated recurring cloud compliance reporting and organized results for operational review.',
